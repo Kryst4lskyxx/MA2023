@@ -1,0 +1,72 @@
+<!--
+ * @Author: kryst4lskyxx 906222327@qq.com
+ * @Date: 2023-06-28 15:36:34
+ * @LastEditors: kryst4lskyxx 906222327@qq.com
+ * @LastEditTime: 2023-06-28 16:27:35
+ * @FilePath: /dist/index.html
+ * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
+
+-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="./bundle.js"></script>
+  <script src="./data.js"></script>
+  <title>Document</title>
+</head>
+
+<body>
+  <div id="kg" style="width:700px; height: 600px; background: #373e41;"></div>
+
+  <script>
+    const target = document.getElementById('kg');
+const { nodes, links } = data;
+console.log(data)
+const method1 = () => console.log('Event 1: Click canvas');
+const method2 = n => console.log('Event 2: Click node->' + n.name);
+const method3 = n => {
+  console.log('Event 3: Click node->');
+  console.log(n);
+};
+
+fetch('./jsonData/menu.json')
+  .then(response => response.json())
+  .then(menu => {
+    function replaceSource(obj) {
+      for (let key in obj) {
+        if (typeof obj[key] === "object") {
+          replaceSource(obj[key]);
+        } else if (typeof obj[key] === "string" && obj[key].startsWith("addNodes")) {
+          obj[key] = eval(obj[key]);
+        }
+      }
+    }
+
+    replaceSource(menu);
+    console.log(menu)
+    kg.init(target);
+    kg.setOption({
+      nodes,
+      links,
+      menu,
+      events: {
+        canvas: [
+          { type: 'click', method: method1 }
+        ],
+        node: [
+          { type: 'click', method: method2 },
+          { type: 'click', method: method3 },
+        ]
+      },
+      dragLock: false
+    });
+  })
+  .catch(error => console.error('Error reading menu.json:', error));
+
+  </script>
+</body>
+
+</html>

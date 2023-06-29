@@ -1,0 +1,1 @@
+{"nodes": [{"id": 18325, "type": "painting", "name": "we shall not go to market today", "r": 20, "color": "#00000000", "cover": "images/paul-gauguin_we-shall-not-go-to-market-today-1892.jpg"}], "links": [{"id": -18325, "source": 1, "type": "1892 post_impressionism", "target": 18325}]}

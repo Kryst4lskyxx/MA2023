@@ -1,0 +1,1 @@
+{"nodes": [{"id": 1021, "type": "painting", "name": "still life with a figure", "r": 20, "color": "#00000000", "cover": "images/balthus_still-life-with-a-figure-1942.jpg"}], "links": [{"id": -1021, "source": 1, "type": "1942 expressionism", "target": 1021}]}
